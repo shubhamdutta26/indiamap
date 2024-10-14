@@ -15,7 +15,8 @@
 #'   by default.
 #' @param label_color The color of the labels to display. Corresponds to the \code{color}
 #'   option in the [ggplot2::aes()] mapping. The default is \code{"black"}.
-#'   \href{https://usmap.dev/docs/Rcolor.pdf}{Click here}
+#' @param label_size The size of the labels to display. Corresponds to the \code{size}
+#'   option in the [ggplot2::aes()] mapping. The default is \code{4}.
 #'   for more color options.
 #' @param ... Other arguments to pass to [ggplot2::aes()]. These are
 #'   often aesthetics, used to set an aesthetic to a fixed value, like \code{color = "red"}
@@ -56,6 +57,7 @@ plot_map <- function(regions = c("states", "state", "districts", "district"),
                      theme = theme_map(),
                      labels = FALSE,
                      label_color = "black",
+                     label_size = 4,
                      ...) {
 
   # check for ggplot2
@@ -76,7 +78,7 @@ plot_map <- function(regions = c("states", "state", "districts", "district"),
   }
 
   if (is.null(geom_args[["linewidth"]])) {
-    geom_args[["linewidth"]] <- 0.4
+    geom_args[["linewidth"]] <- 0.3
   }
 
   # set default "fill" if data is not included
@@ -125,12 +127,13 @@ plot_map <- function(regions = c("states", "state", "districts", "district"),
       label_layer <- ggplot2::geom_sf_text(
         data = centroid_labels,
         ggplot2::aes(label = sub(" District", "", .data$district)),
-        color = label_color
+        color = label_color, size = label_size
       )
     } else {
       label_layer <- ggplot2::geom_sf_text(
         data = centroid_labels,
-        ggplot2::aes(label = .data$abbr), color = label_color
+        ggplot2::aes(label = .data$abbr), color = label_color,
+        size = label_size
       )
     }
   } else {

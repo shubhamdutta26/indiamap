@@ -13,6 +13,7 @@ plot_map(
   theme = theme_map(),
   labels = FALSE,
   label_color = "black",
+  label_size = 4,
   ...
 )
 }
@@ -51,8 +52,10 @@ is \code{theme_map} from \href{https://github.com/jrnold/ggthemes}{ggthemes}.}
 by default.}
 
 \item{label_color}{The color of the labels to display. Corresponds to the \code{color}
-option in the [ggplot2::aes()] mapping. The default is \code{"black"}.
-\href{https://usmap.dev/docs/Rcolor.pdf}{Click here}
+option in the [ggplot2::aes()] mapping. The default is \code{"black"}.}
+
+\item{label_size}{The size of the labels to display. Corresponds to the \code{size}
+option in the [ggplot2::aes()] mapping. The default is \code{4}.
 for more color options.}
 
 \item{...}{Other arguments to pass to [ggplot2::aes()]. These are
