@@ -1,22 +1,22 @@
-# example_data <- data.frame(
-#   state = c("AP", "WB", "TAMIL NADU"),
-#   values = c(5, 8, 7)
-# )
+example_data <- data.frame(
+  state = c("AP", "WB", "Tamil Nadu"),
+  values = c(5, 8, 7)
+)
 
 p <- plot_map("districts", fill = "red")
 # q <- plot_map(data = statepop, values = "pop_2022", color = "blue")
-# r <- plot_map(data = example_data, linewidth = 0.8)
+r <- plot_map(data = example_data, linewidth = 0.8)
 s <- plot_map(include = c("WB", "TN", "AP"), labels = TRUE, label_color = "blue")
-# t <- plot_map(regions = "districts", include = "WB", labels = TRUE, fill = "yellow", linewidth = 0.6)
+t <- plot_map(regions = "districts", include = "WB", labels = TRUE, fill = "yellow", linewidth = 0.6)
 u <- plot_map(include = .east, exclude = "WB", labels = TRUE)
 v <- plot_map("state", labels = TRUE, label_size = 2)
 
 test_that("ggplot object is returned", {
   expect_s3_class(p, "ggplot")
   #expect_s3_class(q, "ggplot")
-  #expect_s3_class(r, "ggplot")
+  expect_s3_class(r, "ggplot")
   expect_s3_class(s, "ggplot")
-  # expect_s3_class(t, "ggplot")
+  expect_s3_class(t, "ggplot")
   expect_s3_class(u, "ggplot")
   expect_s3_class(v, "ggplot")
 })
@@ -24,9 +24,9 @@ test_that("ggplot object is returned", {
 test_that("no warnings are produced", {
   expect_silent(p)
   #expect_silent(q)
-  #expect_silent(r)
+  expect_silent(r)
   expect_silent(s)
-  #expect_silent(t)
+  expect_silent(t)
   expect_silent(u)
   expect_silent(v)
 })
@@ -38,13 +38,13 @@ test_that("correct data is used", {
   # q_map_data <- map_with_data(statepop, values = "pop_2022")
   # expect_identical(q$data, q_map_data)
 
-  # r_map_data <- map_with_data(example_data)
-  # expect_identical(r$data, r_map_data)
+  r_map_data <- map_with_data(example_data)
+  expect_identical(r$data, r_map_data)
 
   s_map_data <- india_map(regions = "states", include = c("AP", "WB", "TN"))
   expect_identical(s$data, s_map_data)
 
-  # t_map_data <- india_map(regions = "counties", include = "AZ")
+  t_map_data <- india_map(regions = "districts", include = "WB")
   # expect_identical(t$data, t_map_data)
 
   u_map_data <- india_map(include = .east, exclude = "WB")
@@ -84,12 +84,12 @@ test_that("layer parameters are correct", {
 #   expect_equal(as.character(q$layers[[1]]$aes_params$colour), "blue")
 #   expect_equal(q$layers[[1]]$aes_params$linewidth, 0.4)
 #
-#   expect_s3_class(r$layers[[1]], "ggproto")
-#   expect_s3_class(r$layers[[1]]$geom, "GeomSf")
-#   expect_equal(deparse(r$layers[[1]]$mapping$fill), "~.data[[\"values\"]]")
-#   expect_equal(as.character(r$layers[[1]]$aes_params$colour), "black")
-#   expect_equal(r$layers[[1]]$aes_params$linewidth, 0.8)
-#
+  expect_s3_class(r$layers[[1]], "ggproto")
+  expect_s3_class(r$layers[[1]]$geom, "GeomSf")
+  expect_equal(deparse(r$layers[[1]]$mapping$fill), "~.data[[\"values\"]]")
+  expect_equal(as.character(r$layers[[1]]$aes_params$colour), "black")
+  expect_equal(r$layers[[1]]$aes_params$linewidth, 0.8)
+
   expect_s3_class(s$layers[[1]], "ggproto")
   expect_s3_class(s$layers[[1]]$geom, "GeomSf")
   expect_equal(as.character(s$layers[[1]]$aes_params$fill), "white")
@@ -100,15 +100,15 @@ test_that("layer parameters are correct", {
   expect_equal(deparse(s$layers[[2]]$mapping$label), "~.data$abbr")
   expect_equal(as.character(s$layers[[2]]$aes_params$colour), "blue")
 
-#   expect_s3_class(t$layers[[1]], "ggproto")
-#   expect_s3_class(s$layers[[1]]$geom, "GeomSf")
-#   expect_equal(as.character(t$layers[[1]]$aes_params$fill), "yellow")
-#   expect_equal(as.character(t$layers[[1]]$aes_params$colour), "black")
-#   expect_equal(t$layers[[1]]$aes_params$linewidth, 0.6)
-#   expect_s3_class(t$layers[[2]], "ggproto")
-#   expect_s3_class(t$layers[[2]]$geom, "GeomText")
-#   expect_equal(deparse(t$layers[[2]]$mapping$label),
-#                "~sub(\" County\", \"\", .data$county)")
+  expect_s3_class(t$layers[[1]], "ggproto")
+  expect_s3_class(s$layers[[1]]$geom, "GeomSf")
+  expect_equal(as.character(t$layers[[1]]$aes_params$fill), "yellow")
+  expect_equal(as.character(t$layers[[1]]$aes_params$colour), "black")
+  expect_equal(t$layers[[1]]$aes_params$linewidth, 0.6)
+  expect_s3_class(t$layers[[2]], "ggproto")
+  expect_s3_class(t$layers[[2]]$geom, "GeomText")
+  expect_equal(deparse(t$layers[[2]]$mapping$label),
+               "~sub(\" District\", \"\", .data$district)")
 
   expect_s3_class(u$layers[[1]], "ggproto")
   expect_s3_class(u$layers[[1]]$geom, "GeomSf")
@@ -129,14 +129,3 @@ test_that("layer parameters are correct", {
   expect_equal(deparse(v$layers[[2]]$mapping$label), "~.data$abbr")
   expect_equal(v$layers[[2]]$aes_params$size, 2)
 })
-
-# test_that("county data works without specifying `region`", {
-#   data <- data.frame(
-#     fips = c("36001", "36003", "36005", "36007"),
-#     values = c(1, 3, 3, 5)
-#   )
-#
-#   p <- plot_map(data = data, include = "NY", labels = TRUE)
-#   expect_equal(deparse(p$layers[[2]]$mapping$label),
-#                "~sub(\" County\", \"\", .data$county)")
-# })

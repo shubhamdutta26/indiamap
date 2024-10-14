@@ -91,7 +91,7 @@ plot_map <- function(regions = c("states", "state", "districts", "district"),
     map_df <- indiamap::india_map(regions = regions, include = include, exclude = exclude)
     geom_args[["mapping"]] <- ggplot2::aes()
   } else {
-    map_df <- indiamap::india_map(data, values = values, include = include, exclude = exclude)
+    map_df <- indiamap::map_with_data(data, values = values, include = include, exclude = exclude)
 
     if (!is.null(map_df$district)) regions <- "districts"
     geom_args[["mapping"]] <- ggplot2::aes(fill = .data[[values]])
@@ -110,7 +110,7 @@ plot_map <- function(regions = c("states", "state", "districts", "district"),
       centroid_labels <- centroid_labels[
         centroid_labels$stname %in% include |
           centroid_labels$abbr %in% include |
-          centroid_labels$stcode11 %in% include,
+          centroid_labels$code11 %in% include,
       ]
     }
 
@@ -118,8 +118,8 @@ plot_map <- function(regions = c("states", "state", "districts", "district"),
       centroid_labels <- centroid_labels[!(
         centroid_labels$stname %in% exclude |
           centroid_labels$abbr %in% exclude |
-          centroid_labels$stcode11 %in% exclude |
-          substr(centroid_labels$stcode11, 1, 2) %in% exclude
+          centroid_labels$code11 %in% exclude |
+          substr(centroid_labels$code11, 1, 2) %in% exclude
       ), ]
     }
 

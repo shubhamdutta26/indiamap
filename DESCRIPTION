@@ -14,7 +14,8 @@ LazyData: true
 Imports: 
     ggplot2,
     indiamapdata,
-    rlang
+    rlang,
+    sf
 RoxygenNote: 7.3.2
 Suggests: 
     testthat (>= 3.0.0)
