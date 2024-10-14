@@ -13,5 +13,11 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     ggplot2,
-    indiamapdata
+    indiamapdata,
+    rlang
 RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+URL: https://github.com/shubhamdutta26/indiamap
+BugReports: https://github.com/shubhamdutta26/indiamap/issues
