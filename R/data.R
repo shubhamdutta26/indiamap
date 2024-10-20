@@ -14,6 +14,7 @@
 #'   \item \code{pop_1951} The 1951 population estimate (in number of people).
 #'   \item \code{pop_2011} The 2011 population estimate (in number of people).
 #'   \item \code{pop_2023} The 2023 population estimate (in number of people).
+#'   \item \code{pop_2024} The 2024 population estimate (in number of people).
 #' }
 #'
 #' @name statepop
