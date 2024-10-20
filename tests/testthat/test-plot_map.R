@@ -4,7 +4,7 @@ example_data <- data.frame(
 )
 
 p <- plot_map("districts", fill = "red")
-# q <- plot_map(data = statepop, values = "pop_2022", color = "blue")
+q <- plot_map(data = statepop, values = "pop_2023", color = "blue")
 r <- plot_map(data = example_data, linewidth = 0.8)
 s <- plot_map(include = c("WB", "TN", "AP"), labels = TRUE, label_color = "blue")
 t <- plot_map(regions = "districts", include = "WB", labels = TRUE, fill = "yellow", linewidth = 0.6)
@@ -13,7 +13,7 @@ v <- plot_map("state", labels = TRUE, label_size = 2)
 
 test_that("ggplot object is returned", {
   expect_s3_class(p, "ggplot")
-  #expect_s3_class(q, "ggplot")
+  expect_s3_class(q, "ggplot")
   expect_s3_class(r, "ggplot")
   expect_s3_class(s, "ggplot")
   expect_s3_class(t, "ggplot")
@@ -23,7 +23,7 @@ test_that("ggplot object is returned", {
 
 test_that("no warnings are produced", {
   expect_silent(p)
-  #expect_silent(q)
+  expect_silent(q)
   expect_silent(r)
   expect_silent(s)
   expect_silent(t)
@@ -35,8 +35,8 @@ test_that("correct data is used", {
   p_map_data <- india_map(regions = "districts")
   expect_identical(p$data, p_map_data)
 
-  # q_map_data <- map_with_data(statepop, values = "pop_2022")
-  # expect_identical(q$data, q_map_data)
+  q_map_data <- map_with_data(statepop, values = "pop_2023")
+  expect_identical(q$data, q_map_data)
 
   r_map_data <- map_with_data(example_data)
   expect_identical(r$data, r_map_data)
@@ -45,7 +45,7 @@ test_that("correct data is used", {
   expect_identical(s$data, s_map_data)
 
   t_map_data <- india_map(regions = "districts", include = "WB")
-  # expect_identical(t$data, t_map_data)
+  expect_identical(t$data, t_map_data)
 
   u_map_data <- india_map(include = .east, exclude = "WB")
   expect_identical(u$data, u_map_data)
@@ -78,12 +78,12 @@ test_that("layer parameters are correct", {
   expect_equal(as.character(p$layers[[1]]$aes_params$fill), "red")
   expect_equal(p$layers[[1]]$aes_params$linewidth, 0.3)
 
-#   expect_s3_class(q$layers[[1]], "ggproto")
-#   expect_s3_class(q$layers[[1]]$geom, "GeomSf")
-#   expect_equal(deparse(q$layers[[1]]$mapping$fill), "~.data[[\"pop_2022\"]]")
-#   expect_equal(as.character(q$layers[[1]]$aes_params$colour), "blue")
-#   expect_equal(q$layers[[1]]$aes_params$linewidth, 0.4)
-#
+  expect_s3_class(q$layers[[1]], "ggproto")
+  expect_s3_class(q$layers[[1]]$geom, "GeomSf")
+  expect_equal(deparse(q$layers[[1]]$mapping$fill), "~.data[[\"pop_2023\"]]")
+  expect_equal(as.character(q$layers[[1]]$aes_params$colour), "blue")
+  expect_equal(q$layers[[1]]$aes_params$linewidth, 0.3)
+
   expect_s3_class(r$layers[[1]], "ggproto")
   expect_s3_class(r$layers[[1]]$geom, "GeomSf")
   expect_equal(deparse(r$layers[[1]]$mapping$fill), "~.data[[\"values\"]]")
@@ -108,7 +108,7 @@ test_that("layer parameters are correct", {
   expect_s3_class(t$layers[[2]], "ggproto")
   expect_s3_class(t$layers[[2]]$geom, "GeomText")
   expect_equal(deparse(t$layers[[2]]$mapping$label),
-               "~sub(\" District\", \"\", .data$district)")
+               "~sub(\" District\", \"\", .data$dtname)")
 
   expect_s3_class(u$layers[[1]], "ggproto")
   expect_s3_class(u$layers[[1]]$geom, "GeomSf")
