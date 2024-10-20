@@ -126,7 +126,7 @@ plot_map <- function(regions = c("states", "state", "districts", "district"),
     if (regions == "district" || regions == "districts") {
       label_layer <- ggplot2::geom_sf_text(
         data = centroid_labels,
-        ggplot2::aes(label = sub(" District", "", .data$district)),
+        ggplot2::aes(label = sub(" District", "", .data$dtname)),
         color = label_color, size = label_size
       )
     } else {

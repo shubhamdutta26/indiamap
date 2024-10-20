@@ -61,7 +61,7 @@ map_with_data <- function(data,
     data$code11 <- indiamap::code11(data$state)
   } else {
     # error
-    stop("`data` must be a data.frame containing either a `stname` or `code11` column.")
+    stop("`data` must be a data.frame containing either a `state` or `code11` column.")
   }
 
   data$code11 <- as.character(data$code11)
