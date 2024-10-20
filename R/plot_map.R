@@ -31,6 +31,7 @@
 #'   object, it can be extended with more [ggplot2::Geom] layers, scales, labels,
 #'   themes, etc.
 #'
+#' @importFrom vdiffr expect_doppelganger
 #' @seealso [indiamap], [ggplot2::theme()]
 #'
 #' @examples
