@@ -7,7 +7,10 @@ Authors@R:
     role = c("aut", "cre", "cph"),
     comment = c(ORCID = "0000-0001-8484-0717"))
 Maintainer: Shubham Dutta <shubhamdutta26@gmail.com>
-Description: Plot maps of Indian subcontinent.
+Description: Get map data frames for india with different region levels 
+    (e.g., district, state). The package also offers convenience functions for 
+    plotting choropleths, visualizing spatial data, and handling state/district
+    codes.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -22,3 +25,5 @@ Suggests:
 Config/testthat/edition: 3
 URL: https://github.com/shubhamdutta26/indiamap
 BugReports: https://github.com/shubhamdutta26/indiamap/issues
+Depends: 
+    R (>= 2.10)
