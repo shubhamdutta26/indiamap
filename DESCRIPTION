@@ -18,7 +18,8 @@ Imports:
     ggplot2,
     indiamapdata,
     rlang,
-    sf
+    sf,
+    vdiffr
 RoxygenNote: 7.3.2
 Suggests: 
     testthat (>= 3.0.0)
