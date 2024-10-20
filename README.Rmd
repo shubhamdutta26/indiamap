@@ -20,7 +20,24 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/shubhamdutta26/indiamap/graph/badge.svg)](https://app.codecov.io/gh/shubhamdutta26/indiamap)
 <!-- badges: end -->
 
-The goal of indiamap is to ...
+## indiamap
+
+```{r header, echo=FALSE}
+library(indiamap)
+library(ggplot2)
+
+plt1 <- plot_map(regions = "states", data = statepop, values = "pop_2024", linewidth = 0.2) +
+  scale_fill_continuous(low = "green", high = "red", guide = "none")
+
+plt2 <- plot_map(regions = "states", data = statepop, values = "pop_2024", include = c("UP", "MP", "RJ", "PB", "HR", "NCT"), linewidth = 0.2, labels = TRUE)  +
+  scale_fill_continuous(low = "green", high = "red", guide = "none")
+
+wb <- plot_map("districts", data = wb_2011, values = "pop_2011", include = "WB")  +
+  scale_fill_continuous(low = "green", high = "red", guide = "none")
+
+cowplot::plot_grid(plt1, plt2, wb, nrow = 1)
+```
+
 
 ## Installation
 
@@ -30,28 +47,3 @@ You can install the development version of indiamap from [GitHub](https://github
 # install.packages("pak")
 pak::pak("shubhamdutta26/indiamap")
 ```
-
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-library(indiamap)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
